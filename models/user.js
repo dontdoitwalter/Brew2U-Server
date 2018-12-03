@@ -1,0 +1,41 @@
+module.exports = function(sequelize, DataTypes){
+    return sequalize.define('user',{
+        email:{
+            allowNull:false,
+            type:DataTypes.TEXT,
+            unique:true,
+        },
+        password:{
+            allowNull:false,
+            type:DataTypes.TEXT,
+            validate:{
+                min:[7],
+            }
+        },
+        username:{
+            type:DataTypes.TEXT,
+            allowNull:false,
+            unique:true,
+            validate:{
+                min:[5],
+                max:[25]
+            },
+        },
+        address:{
+            type:DataTypes.TEXT,
+            allowNull:false,
+        },
+        phoneNumber:{
+            type:DataTypes.INT,
+            allowNull:false,
+        },
+        firstName:{
+            type:DataTypes.TEXT,
+            allowNull:false,
+        },
+        lastName:{
+            type:DataTypes.TEXT,
+            allowNull:false
+        }
+    })
+}
