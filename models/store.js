@@ -1,0 +1,32 @@
+module.exports = function(sequelize, DataTypes){
+    return sequelize.define('store',{
+        storeName:{
+            allowNull:false,
+            type:DataTypes.STRING
+        },
+        streetAddress:{
+            allowNull:false,
+            type:DataTypes.STRING
+        },
+        storeState:{
+            allowNull:false,
+            type:DataTypes.STRING
+        },
+        storeCity:{
+            allowNull:false,
+            type:DataTypes.STRING
+        },
+        storeZip:{
+            allowNull:false,
+            type:DataTypes.INTEGER
+        },
+        storePhone:{
+            allowNull:false,
+            type:DataTypes.STRING
+        },
+        storeHours:{
+            allowNull:false,
+            type:DataTypes.STRING
+        }
+    })
+}
