@@ -25,6 +25,21 @@ module.exports = function(sequelize, DataTypes){
             type:DataTypes.STRING,
             allowNull:false,
         },
+        userSecondAddress:{
+            type:DataTypes.STRING,
+        },
+        userState:{
+            type:DataTypes.STRING,
+            allowNull:false
+        },
+        userCity:{
+            type:DataTypes.STRING,
+            allowNull:false
+        },
+        userZipcode:{
+            type:DataTypes.INTEGER,
+            allowNull:false
+        },
         phoneNumber:{
             type:DataTypes.STRING,
             allowNull:false,

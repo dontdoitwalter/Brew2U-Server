@@ -12,6 +12,10 @@ router.post('/signup', function(req, res){
     let Password = req.body.user.password;
     let Email = req.body.user.email;
     let Address = req.body.user.userAddress;
+    let SecondAddress = req.body.user.userSecondAddress;
+    let State = req.body.user.userState;
+    let City = req.body.user.userCity;
+    let Zipcode = req.body.user.userZipcode;
     let PhoneNumber = req.body.user.phoneNumber;
     let FirstName = req.body.user.firstName;
     let LastName = req.body.user.lastName;
@@ -23,6 +27,10 @@ router.post('/signup', function(req, res){
         email:Email,
         userAddress:Address,
         phoneNumber:PhoneNumber,
+        userSecondAddress:SecondAddress,
+        userState:State,
+        userCity:City,
+        userZipcode:Zipcode,
         firstName:FirstName,
         lastName:LastName,
         isAdmin:Administrator,
@@ -106,6 +114,10 @@ router.put('/update/:id', validateSesh, function(req,res){
     let UserName = req.body.user.username;
     let Email = req.body.user.email;
     let Address = req.body.user.userAddress;
+    let SecondAddress = req.body.user.userSecondAddress;
+    let State = req.body.user.userState;
+    let City = req.body.user.userCity;
+    let Zipcode = req.body.user.userZipcode;
     let PhoneNumber = req.body.user.phoneNumber;
     let FirstName = req.body.user.firstName;
     let LastName = req.body.user.lastName;
@@ -114,6 +126,10 @@ router.put('/update/:id', validateSesh, function(req,res){
         username:UserName,
         email:Email,
         userAddress:Address,
+        userSecondAddress:SecondAddress,
+        userState:State,
+        userCity:City,
+        userZipcode:Zipcode,
         phoneNumber:PhoneNumber,
         firstName:FirstName,
         lastName:LastName,
