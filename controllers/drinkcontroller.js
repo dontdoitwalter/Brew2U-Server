@@ -4,15 +4,15 @@ let sequelize = require('../db');
 let Drink = sequelize.import('../models/drink');
 const validateSesh = require('../middleware/validateSession');
 
-
+//CREATE A NEW DRINK//
 router.post('/create', validateSesh, function(req, res){
-    let Name = req.body.drinkName;
-    let Price = req.body.price;
-    let Size = req.body.drinkSize;
-    let Espresso = req.body.espresso;
-    let Milk = req.body.milkOptions;
-    let Foam = req.body.foam;
-    let Description = req.body.drinkDescription;
+    let Name = req.body.drink.drinkName;
+    let Price = req.body.drink.price;
+    let Size = req.body.drink.drinkSize;
+    let Espresso = req.body.drink.espresso;
+    let Milk = req.body.drink.milkOptions;
+    let Foam = req.body.drink.foam;
+    let Description = req.body.drink.drinkDescription;
 
     Drink.create({
         drinkName:Name,
@@ -25,13 +25,90 @@ router.post('/create', validateSesh, function(req, res){
     }).then(
         function createDrink(drink){
             res.json({
-                drink:drink,
+                data:drink,
                 message:'drink created'
             });
         },
         function createError(err){
             res.send(500,err.message)
-        }
-    )
-})
+        });
+});
+
+//GET ONE DRINK//
+router.get('/getdrink/:id',function(req, res){
+    let id = req.params.id;
+
+    Drink.findOne({
+        where:{id:id}
+    }).then(
+        function findDrink(data){
+            res.json({
+                drink:data
+            });
+        },
+        function findFail(err){
+            res.send(500,err.message)
+        });
+});
+
+//GET ALL THE DRINKS CREATED//
+router.get('/alldrinks', function(req, res){
+    Drink.findAll({
+
+    }).then(
+        function findDrinks(data){
+            res.json({
+                drink:data
+            })
+        },
+        function findDrinkFail(err){
+            res.send(500, err.message)
+        });
+});
+
+//DELETE A DRINK//
+router.delete('/delete/:id',validateSesh, function (req, res){
+    let id =req.params.id
+    Drink.destroy({
+        where:{id:id}
+    }).then(
+        function deleteDrinkSuccess(){
+            res.send('this drink deleted')
+        },
+        function deleteDrinkFail(err){
+            res.send(500, err.message);
+        });
+});
+
+//UPDATE A DRINK//
+router.put('/updatedrink/:id', validateSesh, function(req, res){
+    let id = req.params.id;
+    let Name = req.body.drink.drinkName;
+    let Price = req.body.drink.price;
+    let Size = req.body.drink.drinkSize;
+    let Espresso = req.body.drink.espresso;
+    let Milk = req.body.drink.milkOptions;
+    let Foam = req.body.drink.foam;
+    let Description = req.body.drink.drinkDescription;
+
+    Drink.update({
+        drinkName:Name,
+        price:Price,
+        drinkSize:Size,
+        espresso:Espresso,
+        milkOptions:Milk,
+        foam:Foam,
+        drinkDescription:Description
+    },
+    {where:{id:id}}
+    ).then(
+        function drinkUpdateSuccess(data){
+            res.json({
+                message:'drink updated'
+            })
+        },
+        function drinkUpdateError(err){
+            res.send(500,err.message)
+        });
+});
 module.exports = router;

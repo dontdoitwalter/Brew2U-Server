@@ -35,11 +35,11 @@ router.post('/create', validateSesh, function(req, res){
 });
 
 //GET ONE STORE//
-router.get('/show/:id', validateSesh, function(req, res){
-    let userid = req.params.id;
+router.get('/show/:id', function(req, res){
+    let id = req.params.id;
 
     Store.findOne({
-        where:{id:userid}
+        where:{id:id}
     }).then(
         function findStore(data){
             res.json({
@@ -52,7 +52,7 @@ router.get('/show/:id', validateSesh, function(req, res){
 });
 
 //GET ALL STORES//
-router.get('/showall', validateSesh, function(req, res){
+router.get('/showall', function(req, res){
     Store.findAll({
 
     }).then(
