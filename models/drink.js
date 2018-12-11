@@ -1,5 +1,8 @@
 module.exports = function(sequelize, DataTypes){
     return sequelize.define('drink',{
+        owner:{
+            type:DataTypes.INTEGER,
+        },
         drinkName:{
             type:DataTypes.STRING,
             allowNull:false,
@@ -11,15 +14,7 @@ module.exports = function(sequelize, DataTypes){
         drinkSize:{
             type:DataTypes.STRING,
         },
-        espresso:{
-            type:DataTypes.STRING,
-        },
-        milkOptions:{
-            type:DataTypes.STRING
-        },
-        foam:{
-            type:DataTypes.BOOLEAN,
-        },
+        
         drinkDescription:{
             type:DataTypes.STRING,
         }

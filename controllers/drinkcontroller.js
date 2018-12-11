@@ -6,21 +6,17 @@ const validateSesh = require('../middleware/validateSession');
 
 //CREATE A NEW DRINK//
 router.post('/create', validateSesh, function(req, res){
+    let Owner = req.user.id
     let Name = req.body.drink.drinkName;
     let Price = req.body.drink.price;
     let Size = req.body.drink.drinkSize;
-    let Espresso = req.body.drink.espresso;
-    let Milk = req.body.drink.milkOptions;
-    let Foam = req.body.drink.foam;
     let Description = req.body.drink.drinkDescription;
 
     Drink.create({
+        owner:Owner,
         drinkName:Name,
         price:Price,
         drinkSize:Size,
-        espresso:Espresso,
-        milkOptions:Milk,
-        foam:Foam,
         drinkDescription:Description
     }).then(
         function createDrink(drink){
@@ -34,6 +30,20 @@ router.post('/create', validateSesh, function(req, res){
         });
 });
 
+//GET ALL DRINKS FOR ONE USER//
+router.get('/getall', validateSesh, function(req, res){
+    let id = req.user.id
+    Drink.findAll({
+        where:{owner:id}
+    }).then(
+        function findUserDrinks(data){
+            res.json(data);
+        },
+        function findError(err){
+            res.send(500,err.message)
+        });
+});
+
 //GET ONE DRINK//
 router.get('/getdrink/:id',function(req, res){
     let id = req.params.id;
@@ -42,9 +52,7 @@ router.get('/getdrink/:id',function(req, res){
         where:{id:id}
     }).then(
         function findDrink(data){
-            res.json({
-                drink:data
-            });
+            res.json(data);
         },
         function findFail(err){
             res.send(500,err.message)
@@ -86,18 +94,12 @@ router.put('/updatedrink/:id', validateSesh, function(req, res){
     let Name = req.body.drink.drinkName;
     let Price = req.body.drink.price;
     let Size = req.body.drink.drinkSize;
-    let Espresso = req.body.drink.espresso;
-    let Milk = req.body.drink.milkOptions;
-    let Foam = req.body.drink.foam;
     let Description = req.body.drink.drinkDescription;
 
     Drink.update({
         drinkName:Name,
         price:Price,
         drinkSize:Size,
-        espresso:Espresso,
-        milkOptions:Milk,
-        foam:Foam,
         drinkDescription:Description
     },
     {where:{id:id}}
