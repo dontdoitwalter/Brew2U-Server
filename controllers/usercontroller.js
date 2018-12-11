@@ -93,6 +93,21 @@ router.get('/info/:id', validateSesh, function(req, res){
         });
 });
 
+//GET ALL USERS//
+router.get('/allusers', validateSesh, function(req, res){
+    User.findAll({
+
+    }).then(
+        function findUsers(data){
+            res.json({
+                data
+            })
+        },
+        function findFailed(err){
+            res.send(500, err.message)
+        });
+});
+
 //DELETE USER//
 router.delete('/delete/:id', validateSesh, function(req, res){
     let userid = req.user.id;
