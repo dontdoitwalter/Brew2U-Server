@@ -3,7 +3,6 @@ let router = express.Router();
 let sequelize = require('../db');
 let Drink = sequelize.import('../models/drink');
 const validateSesh = require('../middleware/validateSession');
-
 //CREATE A NEW DRINK//
 router.post('/create', validateSesh, function(req, res){
     let Name = req.body.drink.drinkName;
@@ -11,7 +10,7 @@ router.post('/create', validateSesh, function(req, res){
     let Size = req.body.drink.drinkSize;
     let Description = req.body.drink.drinkDescription;
     let id = req.user.id
-
+console.log(id)
     Drink.create({
         userId:id,
         drinkName:Name,
