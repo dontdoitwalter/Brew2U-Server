@@ -6,14 +6,12 @@ const validateSesh = require('../middleware/validateSession');
 
 //CREATE A NEW DRINK//
 router.post('/create', validateSesh, function(req, res){
-    let Owner = req.user.id
     let Name = req.body.drink.drinkName;
     let Price = req.body.drink.price;
     let Size = req.body.drink.drinkSize;
     let Description = req.body.drink.drinkDescription;
 
     Drink.create({
-        owner:Owner,
         drinkName:Name,
         price:Price,
         drinkSize:Size,

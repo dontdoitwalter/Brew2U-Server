@@ -1,8 +1,5 @@
 module.exports = function(sequelize, DataTypes){
-    return sequelize.define('drink',{
-        owner:{
-            type:DataTypes.INTEGER,
-        },
+    const Drink = sequelize.define('drink',{
         drinkName:{
             type:DataTypes.STRING,
             allowNull:false,
@@ -19,4 +16,8 @@ module.exports = function(sequelize, DataTypes){
             type:DataTypes.STRING,
         }
     })
+    Drink.associate = models => {
+        Drink.belongsTo(models['user'])
+    }
+    return Drink
 }

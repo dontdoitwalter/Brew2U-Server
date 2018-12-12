@@ -1,5 +1,5 @@
 module.exports = function(sequelize, DataTypes){
-    return sequelize.define('user',{
+    const User = sequelize.define('user',{
         email:{
             allowNull:false,
             type:DataTypes.STRING,
@@ -56,4 +56,8 @@ module.exports = function(sequelize, DataTypes){
             type:DataTypes.BOOLEAN,
         }
     })
+    User.associate = models => {
+        User.hasMany(models['drink'])
+    }
+    return User
 }
