@@ -10,8 +10,10 @@ router.post('/create', validateSesh, function(req, res){
     let Price = req.body.drink.price;
     let Size = req.body.drink.drinkSize;
     let Description = req.body.drink.drinkDescription;
+    let id = req.user.id
 
     Drink.create({
+        userId:id,
         drinkName:Name,
         price:Price,
         drinkSize:Size,
@@ -32,7 +34,7 @@ router.post('/create', validateSesh, function(req, res){
 router.get('/getall', validateSesh, function(req, res){
     let id = req.user.id
     Drink.findAll({
-        where:{owner:id}
+        where:{userId:id}
     }).then(
         function findUserDrinks(data){
             res.json(data);
