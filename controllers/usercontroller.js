@@ -92,6 +92,20 @@ router.get('/info/:id', validateSesh, function(req, res){
             res.send(500,err.message)
         });
 });
+//GET DRINKS FOR ONE USER//
+router.get('/:id/pastorders', validateSesh, function(req, res){
+    User.findOne({
+        where:{id:req.user.id}, include: [{all:true}]
+    }).then(
+        function pastOrders(data){
+            res.json({
+                data
+            })
+        },
+        function errorHandle(err){
+            res.send(500, err.message)
+        });
+});
 
 //GET ALL USERS//
 router.get('/allusers', validateSesh, function(req, res){
@@ -110,7 +124,8 @@ router.get('/allusers', validateSesh, function(req, res){
 
 //DELETE USER//
 router.delete('/delete/:id', validateSesh, function(req, res){
-    let userid = req.user.id;
+    let userid = req.params.id;
+    console.log(userid)
 
     User.destroy({
         where:{id:userid}

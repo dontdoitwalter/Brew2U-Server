@@ -11,12 +11,4 @@ const User = sequelize.import('./models/user');
 Drink.belongsTo(User);
 User.hasMany(Drink);
 
-
-
-
-
-
-
-
-
 module.exports = sequelize;
