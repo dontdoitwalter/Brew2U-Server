@@ -3,7 +3,7 @@ let router = express.Router();
 let sequelize = require('../db');
 let Store = sequelize.import('../models/store');
 const validateSesh = require('../middleware/validateSession');
-Store.sync({force:true})
+// Store.sync({force:true})
 //CREATE NEW STORE//
 router.post('/create', validateSesh, function(req, res){
     let StoreName = req.body.store.storeName;
