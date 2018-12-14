@@ -59,7 +59,7 @@ router.post('/login', function(req,res){
                     if(matches){
                         let token = jwt.sign({id:user.id},process.env.JWT_SECRET,{expiresIn:60*60*24});
                         res.json({
-                            user:user,
+                            user:user.id,
                             message:'successfully logged in',
                             sessiontoken:token
                         })
