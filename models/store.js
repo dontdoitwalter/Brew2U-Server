@@ -19,7 +19,7 @@ module.exports = function(sequelize, DataTypes){
             type:DataTypes.STRING
         },
         storeHours:{
-            type:DataTypes.ARRAY(DataTypes.STRING)
+            type:DataTypes.STRING
         }
     })
 }
